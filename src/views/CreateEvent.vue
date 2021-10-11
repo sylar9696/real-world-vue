@@ -14,12 +14,16 @@
     <BaseInput v-model="event.description" label="Description" type="text" />
     <h3>Where is your Event ?</h3>
     <BaseInput v-model="event.location" label="Location" type="text" />
+    <h3>Extra</h3>
+    <BaseCheckbox v-model="event.extras.catering" label="Catering" />
+    <BaseCheckbox v-model="event.extras.music" label="Music" />
   </form>
 </template>
 
 <script>
 import BaseInput from '@/components/BaseInput'
 import BaseSelect from '@/components/BaseSelect'
+import BaseCheckbox from '@/components/BaseCheckbox'
 
 export default {
   data() {
@@ -48,7 +52,8 @@ export default {
   },
   components: {
     BaseInput,
-    BaseSelect
+    BaseSelect,
+    BaseCheckbox
   }
 }
 </script>
