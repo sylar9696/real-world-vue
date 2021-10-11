@@ -12,15 +12,15 @@
         >&#60; Previous</router-link
       >
 
-  <div class="numPages">
-    <router-link 
-        v-for="numeroPagina in countPages" :key="numeroPagina" 
-        :to="{ name: 'EventList', query: { page: numeroPagina } }"
+      <div class="numPages">
+        <router-link
+          v-for="numeroPagina in countPages"
+          :key="numeroPagina"
+          :to="{ name: 'EventList', query: { page: numeroPagina } }"
         >
-        {{ numeroPagina }}
-      </router-link>
-  </div>
-      
+          {{ numeroPagina }}
+        </router-link>
+      </div>
 
       <router-link
         id="page-next"
@@ -99,7 +99,7 @@ export default {
   text-decoration: none;
   color: #2c3e50;
 }
-.numPages a{
+.numPages a {
   margin: 0 5px;
 }
 
