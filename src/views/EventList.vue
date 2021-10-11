@@ -36,7 +36,6 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 import EventService from '@/services/EventService.js'
-import NProgress from 'nprogress'
 // import { watchEffect } from 'vue'
 
 export default {
@@ -52,7 +51,6 @@ export default {
     }
   },
   beforeRouteEnter(routeTo, routeFrom, next) {
-    NProgress.start()
     //2 numero di eventi per pagina, this.page numero della pagina
     EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
       .then(response => {
@@ -67,14 +65,10 @@ export default {
           name: 'NetworkError'
         })
       })
-      .finally(() => {
-        NProgress.done()
-      })
   },
   beforeRouteUpdate(routeTo) {
-    NProgress.start()
     //2 numero di eventi per pagina, this.page numero della pagina
-    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+    return EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
       .then(response => {
         //console.log(response.headers)
         this.events = response.data
@@ -84,9 +78,6 @@ export default {
         return {
           name: 'NetworkError'
         }
-      })
-      .finally(() => {
-        NProgress.done()
       })
   },
   computed: {

@@ -1,8 +1,4 @@
-import { createStore } from 'vuex'
+import { reactive } from 'vue'
 
-export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {}
-})
+//Global store dove salvare variabili utili per ogni componente, la prima che utilizzerò è flashMessages
+export default reactive({ flashMessages: '', event: null })
