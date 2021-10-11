@@ -12,6 +12,8 @@ import EventService from '@/services/EventService.js'
 import GStore from '@/store'
 
 const About = () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+const CreateEvent = () =>
+  import(/* webpackChunkName: "about" */ '../views/CreateEvent.vue')
 
 const routes = [
   {
@@ -75,6 +77,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/create-event',
+    name: 'CreateEvent',
+    component: CreateEvent
   },
   {
     path: '/:catchAll(.*)',
