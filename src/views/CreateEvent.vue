@@ -1,7 +1,7 @@
 <template>
   <!-- Qui ci va il mio form con tutti i campi -->
   <h1>Create an Event</h1>
-  <form>
+  <form @submit.prevent="sendForm">
     <h3>Select a Category</h3>
     <BaseSelect
       :options="categories"
@@ -17,6 +17,11 @@
     <h3>Extra</h3>
     <BaseCheckbox v-model="event.extras.catering" label="Catering" />
     <BaseCheckbox v-model="event.extras.music" label="Music" />
+    <h3>Are pets Allowed ?</h3>
+    <div>
+      <BaseRadioGroup v-model="event.pets" name="pets" :options="petOptions" />
+    </div>
+    <button type="submit">Submit</button>
   </form>
 </template>
 
@@ -24,6 +29,8 @@
 import BaseInput from '@/components/BaseInput'
 import BaseSelect from '@/components/BaseSelect'
 import BaseCheckbox from '@/components/BaseCheckbox'
+import BaseRadioGroup from '@/components/BaseRadioGroup'
+import axios from 'axios'
 
 export default {
   data() {
@@ -47,13 +54,34 @@ export default {
           catering: false,
           music: false
         }
-      }
+      },
+      petOptions: [
+        { label: 'Yes', value: 1 },
+        { label: 'No', value: 0 }
+      ]
     }
   },
   components: {
     BaseInput,
     BaseSelect,
-    BaseCheckbox
+    BaseCheckbox,
+    BaseRadioGroup
+  },
+  methods: {
+    sendForm() {
+      axios
+        .post(
+          //'https://my-json-server.typicode.com/Code-Pop/Vue-3-Forms/events',
+          'https://my-json-server.typicode.com/Code-Pop/Touring-Vue-Router',
+          this.event
+        )
+        .then(function(response) {
+          console.log('Response', response)
+        })
+        .catch(function(err) {
+          console.log('Error', err)
+        })
+    }
   }
 }
 </script>
