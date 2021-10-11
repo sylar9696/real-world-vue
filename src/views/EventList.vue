@@ -36,7 +36,8 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 import EventService from '@/services/EventService.js'
-import { watchEffect } from 'vue'
+import NProgress from 'nprogress'
+// import { watchEffect } from 'vue'
 
 export default {
   name: 'EventList',
@@ -50,22 +51,43 @@ export default {
       totalEvents: 0
     }
   },
-  created() {
-    //Permette con vue 3 di controllare quando viene modificato un componente senza riaggiornare la pagina
-    watchEffect(() => {
-      //2 numero di eventi per pagina, this.page numero della pagina
-      EventService.getEvents(2, this.page)
-        .then(response => {
-          console.log(response.headers)
-          this.events = response.data
-          this.totalEvents = response.headers['x-total-count']
+  beforeRouteEnter(routeTo, routeFrom, next) {
+    NProgress.start()
+    //2 numero di eventi per pagina, this.page numero della pagina
+    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+      .then(response => {
+        next(comp => {
+          //console.log(response.headers)
+          comp.events = response.data
+          comp.totalEvents = response.headers['x-total-count']
         })
-        .catch(() => {
-          this.$router.push({
-            name: 'NetworkError'
-          })
+      })
+      .catch(() => {
+        next({
+          name: 'NetworkError'
         })
-    })
+      })
+      .finally(() => {
+        NProgress.done()
+      })
+  },
+  beforeRouteUpdate(routeTo) {
+    NProgress.start()
+    //2 numero di eventi per pagina, this.page numero della pagina
+    EventService.getEvents(2, parseInt(routeTo.query.page) || 1)
+      .then(response => {
+        //console.log(response.headers)
+        this.events = response.data
+        this.totalEvents = response.headers['x-total-count']
+      })
+      .catch(() => {
+        return {
+          name: 'NetworkError'
+        }
+      })
+      .finally(() => {
+        NProgress.done()
+      })
   },
   computed: {
     hasNextPage() {
