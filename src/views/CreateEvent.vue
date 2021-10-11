@@ -1,28 +1,60 @@
 <template>
-  <!-- Qui ci va il mio form con tutti i campi -->
-  <h1>Create an Event</h1>
-  <form @submit.prevent="sendForm">
-    <h3>Select a Category</h3>
-    <BaseSelect
-      :options="categories"
-      v-model="event.category"
-      label="Select a category"
-    />
-    {{ event }}
-    <h3>Name e description of the Event</h3>
-    <BaseInput v-model="event.title" label="Title" type="text" />
-    <BaseInput v-model="event.description" label="Description" type="text" />
-    <h3>Where is your Event ?</h3>
-    <BaseInput v-model="event.location" label="Location" type="text" />
-    <h3>Extra</h3>
-    <BaseCheckbox v-model="event.extras.catering" label="Catering" />
-    <BaseCheckbox v-model="event.extras.music" label="Music" />
-    <h3>Are pets Allowed ?</h3>
-    <div>
-      <BaseRadioGroup v-model="event.pets" name="pets" :options="petOptions" />
-    </div>
-    <button type="submit">Submit</button>
-  </form>
+  <div>
+    <h1>Create an event</h1>
+    <form @submit.prevent="sendForm">
+      <BaseSelect
+        :options="categories"
+        v-model="event.category"
+        label="Select a category"
+      />
+
+      <fieldset>
+        <legend>Name & describe your event</legend>
+
+        <BaseInput v-model="event.title" label="Title" type="text" />
+
+        <BaseInput
+          v-model="event.description"
+          label="Description"
+          type="text"
+        />
+      </fieldset>
+
+      <fieldset>
+        <legend>Where is your event?</legend>
+
+        <BaseInput v-model="event.location" label="Location" type="text" />
+      </fieldset>
+
+      <fieldset>
+        <legend>Pets</legend>
+
+        <p>Are pets allowed?</p>
+        <div>
+          <BaseRadioGroup
+            v-model="event.pets"
+            name="pets"
+            :options="petOptions"
+          />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Extras</legend>
+        <div>
+          <BaseCheckbox v-model="event.extras.catering" label="Catering" />
+        </div>
+
+        <div>
+          <BaseCheckbox v-model="event.extras.music" label="Live music" />
+        </div>
+      </fieldset>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <pre>{{ event }}</pre>
+  </div>
 </template>
 
 <script>
@@ -86,14 +118,16 @@ export default {
 }
 </script>
 
-<style scoped>
-h3 {
-  margin: 30px 0;
+<style>
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+legend {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 20px;
 }
 </style>
