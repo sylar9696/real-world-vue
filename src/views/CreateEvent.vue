@@ -2,6 +2,13 @@
   <!-- Qui ci va il mio form con tutti i campi -->
   <h1>Create an Event</h1>
   <form>
+    <h3>Select a Category</h3>
+    <BaseSelect
+      :options="categories"
+      v-model="event.category"
+      label="Select a category"
+    />
+    {{ event }}
     <h3>Name e description of the Event</h3>
     <BaseInput v-model="event.title" label="Title" type="text" />
     <BaseInput v-model="event.description" label="Description" type="text" />
@@ -12,9 +19,20 @@
 
 <script>
 import BaseInput from '@/components/BaseInput'
+import BaseSelect from '@/components/BaseSelect'
+
 export default {
   data() {
     return {
+      categories: [
+        'sustainability',
+        'nature',
+        'animal welfare',
+        'housing',
+        'education',
+        'food',
+        'community'
+      ],
       event: {
         category: '',
         title: '',
@@ -29,7 +47,8 @@ export default {
     }
   },
   components: {
-    BaseInput
+    BaseInput,
+    BaseSelect
   }
 }
 </script>
