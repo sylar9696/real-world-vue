@@ -10,15 +10,13 @@ const apiClient = axios.create({
 })
 
 export default {
-  //mi permette di ottenere tot articoli per pagina e tot pagine
-  getEvents(perPage, page) {
-    //Bisogna inserire i parametri della funzione con la concatenazione
-    return apiClient.get('/events?_limit=' + perPage + '&_page=' + page)
+  getEvents() {
+    return apiClient.get('/events')
   },
   getEvent(id) {
     return apiClient.get('/events/' + id)
   },
-  postEvent(event) {
+  postEvent(event) { 
     return apiClient.post('/events', event)
   }
 }
