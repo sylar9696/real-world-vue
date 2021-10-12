@@ -119,11 +119,11 @@ router.beforeEach((to, from) => {
 
   const notAuthorized = true
   if (to.meta.requireAuth && notAuthorized) {
-    GStore.flashMessage = 'Sorry, you are not authorized to view this page'
+    // GStore.flashMessage = 'Sorry, you are not authorized to view this page'
 
-    setTimeout(() => {
-      GStore.flashMessage = ''
-    }, 3000)
+    // setTimeout(() => {
+    //   GStore.flashMessage = ''
+    // }, 3000)
 
     if (from.href) {
       // <--- If this navigation came from a previous page.

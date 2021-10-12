@@ -62,7 +62,10 @@ import BaseInput from '@/components/BaseInput'
 import BaseSelect from '@/components/BaseSelect'
 import BaseCheckbox from '@/components/BaseCheckbox'
 import BaseRadioGroup from '@/components/BaseRadioGroup'
-import axios from 'axios'
+
+import { v4 as uuidv4 } from 'uuid'
+
+//import axios from 'axios'
 
 export default {
   data() {
@@ -77,11 +80,13 @@ export default {
         'community'
       ],
       event: {
+        id: '',
         category: '',
         title: '',
         description: '',
         location: '',
         pets: 1,
+        organizer: '',
         extras: {
           catering: false,
           music: false
@@ -101,18 +106,22 @@ export default {
   },
   methods: {
     sendForm() {
-      axios
-        .post(
-          //'https://my-json-server.typicode.com/Code-Pop/Vue-3-Forms/events',
-          'https://my-json-server.typicode.com/Code-Pop/Touring-Vue-Router',
-          this.event
-        )
-        .then(function(response) {
-          console.log('Response', response)
-        })
-        .catch(function(err) {
-          console.log('Error', err)
-        })
+      this.event.id = uuidv4() // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+      this.event.organizer = this.$store.state.user
+      console.log('Event:', this.event)
+
+      // axios
+      //   .post(
+      //     //'https://my-json-server.typicode.com/Code-Pop/Vue-3-Forms/events',
+      //     'https://my-json-server.typicode.com/Code-Pop/Touring-Vue-Router',
+      //     this.event
+      //   )
+      //   .then(function(response) {
+      //     console.log('Response', response)
+      //   })
+      //   .catch(function(err) {
+      //     console.log('Error', err)
+      //   })
     }
   }
 }

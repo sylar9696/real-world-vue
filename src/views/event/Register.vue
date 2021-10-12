@@ -12,13 +12,13 @@ export default {
       //Call to api
       //If registered then redirect to event details
 
-      this.GStore.flashMessage =
-        'You are successfully registered for ' + this.event.title
+      // this.GStore.flashMessage =
+      //   'You are successfully registered for ' + this.event.title
 
-      //Pulire il messaggio dopo 3 sec
-      setTimeout(() => {
-        this.GStore.flashMessage = ''
-      }, 3000)
+      // //Pulire il messaggio dopo 3 sec
+      // setTimeout(() => {
+      //   this.GStore.flashMessage = ''
+      // }, 3000)
 
       this.$router.push({
         name: 'EventDetails'
