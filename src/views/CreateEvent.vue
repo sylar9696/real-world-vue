@@ -62,6 +62,7 @@ import BaseInput from '@/components/BaseInput'
 import BaseSelect from '@/components/BaseSelect'
 import BaseCheckbox from '@/components/BaseCheckbox'
 import BaseRadioGroup from '@/components/BaseRadioGroup'
+import EventService from '@/services/EventService.js'
 
 import { v4 as uuidv4 } from 'uuid'
 
@@ -109,6 +110,14 @@ export default {
       this.event.id = uuidv4() // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
       this.event.organizer = this.$store.state.user
       console.log('Event:', this.event)
+      EventService.postEvent(this.event)
+        .then(() => {
+          // add event to vuex state using mutations
+          this.$store.commit('ADD_EVENT', this.event)
+        })
+        .catch(error => {
+          console.log(error)
+        })
 
       // axios
       //   .post(

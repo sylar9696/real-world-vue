@@ -29,6 +29,32 @@
       "date": "July 22, 2022",
       "time": "11:00",
       "organizer": "Carey Wales"
+    },
+    {
+      "id": "0cf293d7-7ad3-4945-803a-b4ef50c37853",
+      "category": "nature",
+      "title": "Title 1",
+      "description": "Description 1",
+      "location": "Location 1",
+      "pets": 1,
+      "organizer": "Adam Jahr",
+      "extras": {
+        "catering": true,
+        "music": true
+      }
+    },
+    {
+      "id": "98b7be40-3996-44d0-b6c2-3776b44088f9",
+      "category": "nature",
+      "title": "test 2",
+      "description": "Desc test 2",
+      "location": "Location test 2",
+      "pets": 0,
+      "organizer": "Adam Jahr",
+      "extras": {
+        "catering": true,
+        "music": true
+      }
     }
   ]
 }
